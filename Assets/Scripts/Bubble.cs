@@ -16,12 +16,13 @@ namespace DefaultNamespace
 
         private void CaptureFood(Food capturedFood)
         {
-            if (capturedFood.IsCaptured) return;
+            if (capturedFood.IsCaptured || IsCaptured) return;
             
             capturedFood.gameObject.transform.SetParent(gameObject.transform);
             capturedFood.MoveSpeed = 0f;
             capturedFood.transform.position = transform.position;
             capturedFood.IsCaptured = true;
+            IsCaptured = true;
             
             MoveSpeed = 1f;
             direction = Vector3.down;

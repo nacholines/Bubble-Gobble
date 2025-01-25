@@ -5,7 +5,6 @@ namespace DefaultNamespace
 {
     public class Food : MovingAgent
     {
-        public bool IsCaptured;
         public bool isRotten { get; private set; }
         public FoodType foodType;
     }

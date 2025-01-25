@@ -5,7 +5,7 @@ namespace DefaultNamespace
 {
     public class FoodEater : MonoBehaviour
     {
-        public static event Action FoodEaten;
+        public static event Action<bool> FoodEaten;
 
         [SerializeField] private FoodType wantedFoodType;
 
@@ -21,19 +21,20 @@ namespace DefaultNamespace
         {
             var food = capturedFood;
             Destroy(capturedFood.gameObject);
-            if (capturedFood.isRotten || capturedFood.foodType == wantedFoodType)
-            {
-                HandleBadFood();
-                return;
-            }
+            //if (capturedFood.isRotten || capturedFood.foodType != wantedFoodType)
+            //{
+            //    HandleBadFood();
+            //    return;
+            //}
 
             Debug.Log("good food!");
-            FoodEaten?.Invoke();
+            FoodEaten?.Invoke(true);
         }
 
         private void HandleBadFood()
         {
             Debug.Log("bad food!");
+            FoodEaten?.Invoke(false);
         }
     }
 }

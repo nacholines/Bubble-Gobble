@@ -9,6 +9,21 @@ public class BubbleShooter : MonoBehaviour
     [SerializeField] private Bubble bubblePrefab;
 
     private Vector3 _currentDirection;
+
+    private float _bubbleSpeed = 10f;
+
+    private float _bubbleSpeedIncrease = 3f;
+    
+    
+    private void OnEnable()
+    {
+        LevelManager.GameSpeedUp += SpeedUp;
+    }
+        
+    private void OnDisable()
+    {
+        LevelManager.GameSpeedUp -= SpeedUp;
+    }
     
     private void Update()
     {
@@ -38,7 +53,13 @@ public class BubbleShooter : MonoBehaviour
         {
             Bubble bubble = Instantiate(bubblePrefab, shootPoint.position, Quaternion.identity);
             bubble.Initialize(_currentDirection);
+            bubble.MoveSpeed = _bubbleSpeed;
         }
+    }
+
+    private void SpeedUp()
+    {
+        _bubbleSpeed += _bubbleSpeedIncrease;
     }
 
 }
