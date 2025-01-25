@@ -1,23 +1,30 @@
 using System;
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 namespace DefaultNamespace
 {
-    public class Bubble : MonoBehaviour
+    public class Bubble : MovingAgent
     {
-        [SerializeField] private float _moveSpeed = 1f;
-
-        private Vector3 _direction;
-        
-        public void Initialize(Vector3 direction)
+        private void OnTriggerEnter2D(Collider2D other)
         {
-            _direction = direction.normalized;
+            if (other.gameObject.TryGetComponent<Food>(out var food))
+            {
+                CaptureFood(food);
+            }
         }
 
-        private void Update()
+        private void CaptureFood(Food capturedFood)
         {
-            Vector3 newPosition = transform.position + _direction * _moveSpeed * Time.deltaTime;
-            transform.position = newPosition;
+            if (capturedFood.IsCaptured) return;
+            
+            capturedFood.gameObject.transform.SetParent(gameObject.transform);
+            capturedFood.MoveSpeed = 0f;
+            capturedFood.transform.position = transform.position;
+            capturedFood.IsCaptured = true;
+            
+            MoveSpeed = 1f;
+            direction = Vector3.down;
         }
     }
 }
