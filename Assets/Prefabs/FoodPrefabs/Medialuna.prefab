@@ -99,6 +99,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveSpeed: 2
+  IsCaptured: 0
+  foodType: 2
 --- !u!61 &3334465588518082632
 BoxCollider2D:
   m_ObjectHideFlags: 0

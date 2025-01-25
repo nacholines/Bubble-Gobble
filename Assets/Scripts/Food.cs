@@ -7,7 +7,7 @@ namespace DefaultNamespace
     {
         public bool IsCaptured;
         public bool isRotten { get; private set; }
-        private FoodType _foodType;
+        public FoodType foodType;
     }
 
     public enum FoodType
