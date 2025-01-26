@@ -20,12 +20,12 @@ namespace DefaultNamespace
         private void TryEatFood(Food capturedFood)
         {
             var food = capturedFood;
-            Destroy(capturedFood.gameObject);
-            //if (capturedFood.isRotten || capturedFood.foodType != wantedFoodType)
-            //{
-            //    HandleBadFood();
-            //    return;
-            //}
+            Destroy(capturedFood.Bubble.gameObject);
+            if (food.isRotten || food.foodType != wantedFoodType)
+            {
+                HandleBadFood();
+                return;
+            }
 
             Debug.Log("good food!");
             FoodEaten?.Invoke(true);

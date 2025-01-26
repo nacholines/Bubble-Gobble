@@ -6,6 +6,8 @@ namespace DefaultNamespace
 {
     public class Bubble : MovingAgent
     {
+        public static event Action FoodCaptured;
+        
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.gameObject.TryGetComponent<Food>(out var food))
@@ -22,7 +24,9 @@ namespace DefaultNamespace
             capturedFood.MoveSpeed = 0f;
             capturedFood.transform.position = transform.position;
             capturedFood.IsCaptured = true;
+            capturedFood.Bubble = this;
             IsCaptured = true;
+            FoodCaptured?.Invoke();
             
             MoveSpeed = 1f;
             direction = Vector3.down;

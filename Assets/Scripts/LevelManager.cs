@@ -7,6 +7,7 @@ namespace DefaultNamespace
     public class LevelManager : MonoBehaviour
     {
         public static event Action GameSpeedUp;
+        public static event Action<int> HealthChanged;
         
         [SerializeField] private int gameSpeedUpThreshold = 3;
         [SerializeField] private FoodSpawner foodSpawner;
@@ -39,6 +40,7 @@ namespace DefaultNamespace
             }
 
             currentHealth--;
+            HealthChanged?.Invoke(currentHealth);
 
             if (currentHealth == 0)
             {
