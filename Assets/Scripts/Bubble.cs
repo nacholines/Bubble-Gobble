@@ -28,7 +28,7 @@ namespace DefaultNamespace
             IsCaptured = true;
             FoodCaptured?.Invoke();
             
-            MoveSpeed = 1f;
+            MoveSpeed = 3f;
             direction = Vector3.down;
         }
     }

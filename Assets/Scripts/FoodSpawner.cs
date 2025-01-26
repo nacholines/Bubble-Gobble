@@ -28,11 +28,18 @@ namespace DefaultNamespace
         private void OnEnable()
         {
             LevelManager.GameSpeedUp += IncreaseSpawnSpeed;
+            LevelManager.GameFinished += HandleGameFinished;
         }
         
         private void OnDisable()
         {
             LevelManager.GameSpeedUp -= IncreaseSpawnSpeed;
+            LevelManager.GameFinished -= HandleGameFinished;
+        }
+        
+        private void HandleGameFinished()
+        {
+            gameObject.SetActive(false);
         }
 
         private IEnumerator FoodSpawningCoroutine()

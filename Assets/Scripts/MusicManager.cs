@@ -10,19 +10,30 @@ namespace DefaultNamespace
         [SerializeField] private float targetPitch = 2.0f; // Maximum pitch value
         [SerializeField] private float pitchChangeInterval = 0.4f; // Fixed increment
         [SerializeField] private float intervalDuration = 0.5f; // Time between increments
+        [SerializeField] private AudioClip gameFinishedMusic;
 
         private Coroutine pitchCoroutine;
+        
 
         private void OnEnable()
         {
             LevelManager.GameSpeedUp += SpeedUpMusic;
+            LevelManager.GameFinished += HandleGameFinished;
         }
 
         private void OnDisable()
         {
             LevelManager.GameSpeedUp -= SpeedUpMusic;
+            LevelManager.GameFinished -= HandleGameFinished;
         }
 
+        private void HandleGameFinished()
+        {
+            music.clip = gameFinishedMusic;
+            music.Play();
+            music.loop = false;
+        }
+        
         private void SpeedUpMusic()
         {
             if (music == null)

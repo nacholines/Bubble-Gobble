@@ -1,6 +1,8 @@
 using System;
 using JetBrains.Annotations;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace DefaultNamespace
 {
@@ -8,9 +10,13 @@ namespace DefaultNamespace
     {
         public static event Action GameSpeedUp;
         public static event Action<int> HealthChanged;
-        
+        public static event Action GameFinished;
+
         [SerializeField] private int gameSpeedUpThreshold = 3;
         [SerializeField] private FoodSpawner foodSpawner;
+
+        [SerializeField] private TextMeshProUGUI scoreText;
+        [SerializeField] private GameObject gameFinishedScreen;
         
         private int score = 0;
 
@@ -20,6 +26,11 @@ namespace DefaultNamespace
 
         private int currentStage = 0;
         private int maxStage = 5;
+
+        private void Awake()
+        {
+            gameFinishedScreen.SetActive(false);
+        }
 
         private void OnEnable()
         {
@@ -44,6 +55,8 @@ namespace DefaultNamespace
 
             if (currentHealth == 0)
             {
+                GameFinished?.Invoke();
+                gameFinishedScreen.SetActive(true);
                 Debug.Log("You lost!");
             }
         }
@@ -51,6 +64,7 @@ namespace DefaultNamespace
         private void GoodFoodEaten()
         {
             score += 100;
+            scoreText.text = score.ToString();
             foodEaten++;
             Debug.Log(score);
             if (foodEaten % gameSpeedUpThreshold == 0)
@@ -65,6 +79,11 @@ namespace DefaultNamespace
             
             currentStage++;
             GameSpeedUp?.Invoke();
+        }
+
+        public void GoToMainMenu()
+        {
+            SceneManager.LoadScene("MainMenu");
         }
     }
 }

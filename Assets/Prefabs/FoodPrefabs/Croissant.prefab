@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.727435, y: 1.0573223, z: 0.5}
-  m_LocalScale: {x: 0.24000001, y: 0.24000001, z: 0.24000001}
+  m_LocalScale: {x: 0.32, y: 0.32, z: 0.32}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -101,6 +101,7 @@ MonoBehaviour:
   MoveSpeed: 2
   IsCaptured: 0
   foodType: 2
+  Bubble: {fileID: 0}
 --- !u!61 &3334465588518082632
 BoxCollider2D:
   m_ObjectHideFlags: 0

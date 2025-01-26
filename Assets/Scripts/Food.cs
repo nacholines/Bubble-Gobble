@@ -24,6 +24,7 @@ namespace DefaultNamespace
         croissant,
         lettuce,
         chicken,
+        cake,
         cherry
     }
 }

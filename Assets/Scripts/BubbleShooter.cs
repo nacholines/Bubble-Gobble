@@ -19,24 +19,39 @@ public class BubbleShooter : MonoBehaviour
     
     private const float AngleRange = 150f;
     private const int SegmentCount = 5;
-    
+
+    private AudioSource bubbleAudioSource;
+
+    private void Awake()
+    {
+        bubbleAudioSource = GetComponent<AudioSource>();
+    }
+
     private void OnEnable()
     {
         LevelManager.GameSpeedUp += SpeedUp;
+        LevelManager.GameFinished += HandleGameFinished;
     }
         
     private void OnDisable()
     {
         LevelManager.GameSpeedUp -= SpeedUp;
+        LevelManager.GameFinished -= HandleGameFinished;
     }
     
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
+            bubbleAudioSource.Play();
             UpdateDirectionWithMouse();
             ShootProjectile();
         }
+    }
+
+    private void HandleGameFinished()
+    {
+        gameObject.SetActive(false);
     }
     
     public void UpdateDirectionWithMouse()
